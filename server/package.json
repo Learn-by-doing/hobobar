@@ -1,0 +1,22 @@
+{
+  "name": "hobobar",
+  "version": "1.0.0",
+  "description": "Map locations of edible (fruit/nut/berry) trees in your city",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Learn-by-doing/hobobar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Learn-by-doing/hobobar/issues"
+  },
+  "homepage": "https://github.com/Learn-by-doing/hobobar#readme",
+  "dependencies": {
+    "express": "4.14.1"
+  }
+}
