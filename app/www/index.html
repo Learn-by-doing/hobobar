@@ -18,8 +18,22 @@
         <title>HoboBar</title>
     </head>
     <body>
-        <div class="app"></div>
+        <div class="app">
+
+            <!-- scaffolding to test location services -- start -->
+            <h3>Get current position</h3>
+            <button type="button" id="positionCurrentButton">Get position</button>
+            <div id="positionCurrent"></div>
+
+            <h3>Rolling current position</h3>
+            <button type="button" id="positionRollingStartButton">Start watching</button>
+            <button type="button" id="positionRollingStopButton">Stop watching</button>
+            <div id="positionRolling"></div>
+            <!-- scaffolding to test location services -- end -->
+
+        </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+
     </body>
 </html>
