@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/Learn-by-doing/hobobar#readme",
   "dependencies": {
-    "express": "4.14.1"
+    "async": "2.1.5",
+    "express": "4.14.1",
+    "knex": "0.12.7",
+    "mysql": "2.13.0",
+    "underscore": "1.8.3"
   }
 }

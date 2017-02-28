@@ -37,6 +37,16 @@ we won't have a fallback if these are missing
 - UI - decide how to build it - that's still a TODO
 
 
-Installation [TODO]
+Installation
 =============
+
+## Database Setup
+
+Once you have MySQL installed, you will need to setup the local database. Run the following SQL queries to create the database and user:
+```sql
+CREATE DATABASE IF NOT EXISTS hobobar_local;
+GRANT USAGE ON * . * TO  'hobobar_local'@'localhost' IDENTIFIED BY  'password' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+
+GRANT ALL PRIVILEGES ON  `hobobar_local` . * TO  'hobobar_local'@'localhost';
+```
 
