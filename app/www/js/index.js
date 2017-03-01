@@ -42,69 +42,6 @@ document.addEventListener('deviceready', function() {    // The device is ready
             }
         }
 
-        // Scaffolding to get static position
-        var positionCurrent = function(error, data) {
-            if (error) { // should we have an error, do:
-                var errorLog =
-                    'code: ' + error.code + '<br>' +
-                    'message: ' + error.message + '<br>';
-                document.getElementById("positionCurrent").innerHTML = errorLog;
-            } else {
-                var positionData =
-                    'Latitude: ' + data.coords.latitude + '<br>' +
-                    'Longitude: ' + data.coords.longitude + '<br>' +
-                    'Altitude: ' + data.coords.altitude + '<br>' +
-                    'Accuracy: ' + data.coords.accuracy + '<br>' +
-                    'Altitude Accuracy: ' + data.coords.altitudeAccuracy + '<br>' +
-                    'Heading: ' + data.coords.heading + '<br>' +
-                    'Speed: ' + data.coords.speed + '<br>' +
-                    'Timestamp: ' + data.timestamp + '<br>';
-
-                document.getElementById("positionCurrent").innerHTML = positionData;
-            }
-        }
-
-        document.getElementById("positionCurrentButton").addEventListener("click", function() {
-            position.static(positionCurrent);
-        });
-
-
-
-        // Scaffolding to get rolling position
-        // https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-geolocation/
-        var positionStarted = function(error, data) {
-            if (error) {
-                var errorLog =
-                    'code: ' + error.code + '<br>' +
-                    'message: ' + error.message + '<br>';
-            } else {
-                console.log(data.coords);
-                var element = document.getElementById('positionRolling');
-                element.innerHTML =
-                    'Latitude: ' + data.coords.latitude + '<br />' +
-                    'Longitude: ' + data.coords.longitude + '<br />' +
-                    '<hr />' + element.innerHTML;
-            }
-        }
-        var positionStop = function() {
-            if (position.stop(watchID)) {
-                document.getElementById("positionRolling").innerHTML = "stopped";
-            } else {
-                document.getElementById("positionRolling").innerHTML = "stopping failed";
-            }
-        }
-        document.getElementById("positionRollingStartButton").addEventListener("click",
-            function() {
-                position.start(positionStarted);
-            }
-
-        );
-        document.getElementById("positionRollingStopButton").addEventListener("click",
-            function() {
-                position.stop(positionStop);
-            }
-        );
-
 
     })(window);
 
