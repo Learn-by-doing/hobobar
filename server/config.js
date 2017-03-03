@@ -11,5 +11,7 @@ module.exports = {
 		password: process.env.HOBOBAR_DB_PASS || 'password',
 		database: process.env.HOBOBAR_DB_NAME || 'hobobar_local',
 		charset: 'utf8mb4'
-	}
+	},
+
+	uploads: process.env.HOBOBAR_UPLOADS || './uploads'
 };
