@@ -15,10 +15,6 @@ module.exports = function(app) {
 
   		var requested = req.body;
 
-  		console.log('req.body.upperleft["latitude"]: ' + req.body.upperleft_la);
-  		console.log('req.body.upperleft["latitude"]: ' + req.body.upperleft_lo);
-  		console.log('req.body.upperleft["latitude"]: ' + req.body.lowerright_la);
-  		console.log('req.body.upperleft["latitude"]: ' + req.body.lowerright_lo);
   		res.header("Access-Control-Allow-Origin", "*");
 
 		app.db.select([
@@ -31,9 +27,9 @@ module.exports = function(app) {
 		])
 		.from('trees')
 		.where ('latitude','>',req.body.upperleft_la)
-	/*	.and ('latitude','<',req.body.lowerright_la)
-		.and ('longitude','<',req.body.upperleft_lo)
-		.and ('longitude','<',req.body.lowerright_lo) */
+		.andWhere ('latitude','<',req.body.lowerright_la)
+		.andWhere ('longitude','>',req.body.upperleft_lo)
+		.andWhere ('longitude','<',req.body.lowerright_lo) 
 		.then(function(trees) {
 			console.log('inside then of knex');
 			console.log(trees[0]);
