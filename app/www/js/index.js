@@ -4,6 +4,8 @@ document.addEventListener('deviceready', function() {    // The device is ready
 
         var watchID = null;
 
+        var positionForQuery = null;
+
         var position = {
             static: function(callback) {
                 function onSuccess(position) {
@@ -60,6 +62,8 @@ document.addEventListener('deviceready', function() {    // The device is ready
                     'Speed: ' + data.coords.speed + '<br>' +
                     'Timestamp: ' + data.timestamp + '<br>';
 
+                positionForQuery = data.coords;
+
                 document.getElementById("positionCurrent").innerHTML = positionData;
             }
         }
@@ -105,9 +109,57 @@ document.addEventListener('deviceready', function() {    // The device is ready
             }
         );
 
+        function query_trees_from_server (position, cb){
+
+            var url_v = "http://localhost:3000/api/getlist";
+            //var pos_data = [position.latitude-0.000001,position.longitude-0.000001,position.latitude+0.000001,position.longitude+0.000001];
+            var pos_data = {};
+            pos_data.upperleft_la = position.latitude-0.00001;
+            pos_data.upperleft_lo = position.longitude-0.00001;
+            pos_data.lowerright_la = position.latitude+0.00001;
+            pos_data.lowerright_lo = position.longitude+0.00001;
+                        
+
+            jQuery.ajax({ 
+                type: 'POST',
+                data: pos_data,
+                url : url_v,
+                dataType : 'json',
+                error : function() {
+                    alert("Errr is occured");
+                }
+            })
+            .then(function(data, status, xhr){
+                    cb (null, data);
+                }
+            )
+            .fail(function(xhr, err) { 
+                cb(err);
+            });
+
+        }
+
+
+        document.getElementById("treesButton").addEventListener("click",
+            function() {
+                if (!positionForQuery)
+                {
+                    alert('Query postion first!');
+                }
+                else
+                {
+                    query_trees_from_server(positionForQuery, function (message, data){
+                        if (message){
+                            alert (message);
+                        }
+                        else {
+                            alert("Got id:" + data[0].id + " description="+ data[0].description);
+                        }
+                    })
+                }
+        })
+
 
     })(window);
-
-
 
 }, false);

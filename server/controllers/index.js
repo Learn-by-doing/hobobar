@@ -2,7 +2,6 @@
 
 module.exports = function(app) {
 
-	return {
-		home: require('./home')(app),
-	};
+	require('./home')(app);
+	require('./api')(app);
 };
