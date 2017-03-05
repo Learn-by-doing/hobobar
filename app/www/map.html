@@ -10,7 +10,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' https://*.tile.openstreetmap.org data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://api.tiles.mapbox.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' https://*.tile.openstreetmap.org https://*.tiles.mapbox.com https://openlayers.org data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -21,12 +21,15 @@
     <body>
         <div class="app">
 
-			<div id="map"></div>
+			<!--<div id="map"></div>-->
+            <div id="poimap" class="map"></div>
 
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="libs/ol/ol-debug.js"></script>        
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/map.js"></script>
+        <!--<script type="text/javascript" src="js/map.js"></script>-->
+        <script type="text/javascript" src="js/poi.js"></script>
+
     </body>
 </html>
