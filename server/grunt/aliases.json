@@ -1,0 +1,12 @@
+{
+	"default": [
+		"test"
+	],
+	"test": [
+		"test:integration"
+	],
+	"test:integration": [
+		"env:test",
+		"mochaTest:integration"
+	]
+}
