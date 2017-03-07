@@ -15,4 +15,5 @@ module.exports = function(app) {
 		.then(function(trees) {
 			res.json(trees);
 		}).catch(next);
+	});
 };
