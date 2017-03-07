@@ -9,8 +9,8 @@ module.exports = function(app) {
 	app.use(bodyParser.urlencoded({ extended: false }))
 	app.use(bodyParser.json())
 	
-	app.post('/api/getlist', function (req, res) {
-		console.log('inside post');
+	app.get('/api/trees', function (req, res) {
+  		
   		if (!req.body) return res.sendStatus(400);
 
   		var requested = req.body;
