@@ -1,11 +1,12 @@
 'use strict';
 
-module.exports = {
+var config = module.exports = {
 
-	port: 3000,
+	host: process.env.HOBOBAR_HOST || 'localhost',
+	port: parseInt(process.env.HOBOBAR_PORT || 3000),
 
 	db: {
-		host: process.env.HOBOBAR_DB_HOST || '127.0.0.1',
+		host: process.env.HOBOBAR_DB_HOST || 'localhost',
 		port: parseInt(process.env.HOBOBAR_DB_PORT || 3306),
 		user: process.env.HOBOBAR_DB_USER || 'hobobar_local',
 		password: process.env.HOBOBAR_DB_PASS || 'password',
@@ -13,5 +14,9 @@ module.exports = {
 		charset: 'utf8mb4'
 	},
 
-	uploads: process.env.HOBOBAR_UPLOADS || './uploads'
+	uploadsDir: process.env.HOBOBAR_UPLOADS_DIR || __dirname + '/uploads'
 };
+
+if (!config.uploadsDir) {
+	throw Error('Missing required configuration: "uploadsDir".');
+}

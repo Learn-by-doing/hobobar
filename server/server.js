@@ -3,6 +3,7 @@
 var express = require('express');
 var app = module.exports = express();
 
+app.lib = require('./lib');
 app.config = require('./config');
 app.db = require('./database');
 require('./middleware')(app);
