@@ -2,7 +2,7 @@
 
 module.exports = function(app) {
 
-	app.get('/api/v1/trees', function (req, res) {
+	app.get('/api/v1/trees', function(req, res, next) {
 
 		app.db.models.Trees.query().select([
 			'trees.id',
