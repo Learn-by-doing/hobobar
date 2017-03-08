@@ -13,6 +13,7 @@ module.exports = function(app) {
 			'trees.filename'
 		])
 		.then(function(trees) {
+		    res.header('Access-Control-Allow-Origin', '*');
 			res.json(trees);
 		}).catch(next);
 	});
