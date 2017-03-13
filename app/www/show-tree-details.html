@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="../../node_modules/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="../../node_modules/onsenui/css/onsen-css-components.css">
+
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/onsenui/js/onsenui.js"></script>
+    <script src="../../node_modules/vue-onsenui/dist/vue-onsenui.js"></script>
+  </head>
+  <body>
+    <template id="main">
+  <v-ons-navigator>
+    <div :is="page" v-for="page in pageStack" :page-stack="pageStack"></div>
+  </v-ons-navigator>
+</template>
+
+<template id="WelcomePage">
+  <v-ons-page>
+    <custom-toolbar :pop="pop">Welcome Page</custom-toolbar>
+    <p style="text-align: center">
+      This is the first page
+      <v-ons-button @click="push">Push ShowTreeDetails</v-ons-button>
+    </p>
+  </v-ons-page>
+</template>
+
+<template id="ShowTreeDetails">
+  <v-ons-page>
+    <custom-toolbar :pop="pop" :back-label="'WelcomePage'">Tree Details</custom-toolbar>
+    <p style="text-align: center">This is the second page</p>
+  </v-ons-page>
+</template>
+
+<template id="custom-toolbar">
+  <v-ons-toolbar>
+    <div class="left">
+      <v-ons-back-button :on-click="pop">{{ backLabel }}</v-ons-back-button>
+    </div>
+    <div class="center"><slot></slot></div>
+  </v-ons-toolbar>
+</template>
+
+  <div id="app"></div>
+  </body>
+<script src="./js/show-tree-details.js"></script>
+</html>
