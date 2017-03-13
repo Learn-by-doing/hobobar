@@ -15,30 +15,83 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+
+
+        <link rel="stylesheet" href="../../node_modules/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="../../node_modules/onsenui/css/onsen-css-components.css">
+
+        <script src="../../node_modules/vue/dist/vue.js"></script>
+        <script src="../../node_modules/onsenui/js/onsenui.js"></script>
+        <script src="../../node_modules/vue-onsenui/dist/vue-onsenui.js"></script>
+
         <title>HoboBar</title>
     </head>
     <body>
-        <div class="app">
 
-            <!-- scaffolding to test location services - start -->
-            <h3>Get current position</h3>
-            <button type="button" id="positionCurrentButton">Get position</button>
-            <div id="positionCurrent"></div>
+        <v-ons-template id="main">
+            <v-ons-navigator>
+                <div :is="page" v-for="page in pageStack" :page-stack="pageStack"></div>
+            </v-ons-navigator>
+        </v-ons-template>
 
-            <h3>Rolling current position</h3>
-            <button type="button" id="positionRollingStartButton">Start watching</button>
-            <button type="button" id="positionRollingStopButton">Stop watching</button>
-            <div id="positionRolling"></div>
-            <!-- scaffolding to test location services - end -->
+        <v-ons-template id="WelcomePage">
+            <v-ons-page>
+                <custom-toolbar :pop="pop">Welcome Page</custom-toolbar>
+
+                <!-- scaffolding to test location services - start -->
+                <h3>Get current position</h3>
+                <button type="button" id="positionCurrentButton">Get position</button>
+                <div id="positionCurrent"></div>
+
+                <h3>Rolling current position</h3>
+                <button type="button" id="positionRollingStartButton">Start watching</button>
+                <button type="button" id="positionRollingStopButton">Stop watching</button>
+                <div id="positionRolling"></div>
+                <!-- scaffolding to test location services - end -->
 
 
 
-            <a href="./map.html">Map test</button><!-- scaffolding only, not a proper way to navigate to other pages -->
+                <button href="./map.html">Map test</button><!-- scaffolding only, not a proper way to navigate to other pages -->
 
+                <v-ons-button @click="push">Push ShowTreeDetails</v-ons-button>
+            </v-ons-page>
+        </v-ons-template>
 
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
+        <v-ons-template id="ShowTreeDetails">
+            <v-ons-page>
+                <custom-toolbar :pop="pop" :back-label="'WelcomePage'">Tree Details</custom-toolbar>
+                <article style="text-align: center">
+                    <header>
+                        <img src="" alt="The image you are looking for is unavailable.">
+                    </header>
+                    <section>
+                        <h1>
+                          Type: Apple Tree <!-- {{ treeType }} -->
+                        </h1>
+                        <h3>
+                          Description
+                        </h3>
+                        <p>
+                          A tree that bears apples.<!-- {{ treeDescription }} -->
+                        </p>
+                    </section>
+                </article>
+            </v-ons-page>
+        </v-ons-template>
+
+        <v-ons-template id="custom-toolbar">
+          <v-ons-toolbar>
+            <div class="left">
+              <v-ons-back-button :on-click="pop">{{ backLabel }}</v-ons-back-button>
+            </div>
+            <div class="center"><slot></slot></div>
+          </v-ons-toolbar>
+        </v-ons-template>
+
+        <div class="app"></div>
+        <!-- <script type="text/javascript" src="cordova.js"></script> -->
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/show-tree-details.js"></script>
 
     </body>
 </html>
