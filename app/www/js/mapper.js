@@ -1,17 +1,43 @@
+var APIroot = 'http://localhost:3000/api/v1';
+var APItrees = APIroot + '/trees';
+var poiArray = [] // we'll store the markers in here
 var startAt = {
-    lat : 50.083881,
-    lon: 14.433566
+    latitude: 50.083881,
+    longitude: 14.433566
 }
 
+function ajax(target,callback) {
+  var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+      if (xmlhttp.status == 200) {
+        callback(null, xmlhttp.responseText);
+      } else if (xmlhttp.status == 404) {
+        alert('There was an 404 error:\n' + xmlhttp.statusText);
+      } else {
+        alert('something else other than 200 was returned:\n' + xmlhttp.statusText);
+      }
+    }
+  };
+
+  xmlhttp.open("GET", target, true);
+  xmlhttp.send();
+}
+
+
 // initialize the map
-var map = L.map('map').setView([startAt.lat,startAt.lon], 13);
+var map = L.map('map').setView([startAt.latitude, startAt.longitude], 12);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    maxZoom: 14
+    maxZoom: 20
 }).addTo(map);
 
-map.locate({setView: true, maxZoom: 16});
+map.locate({
+    setView: true,
+    maxZoom: 12
+});
 
 function onLocationFound(e) {
     L.marker(e.latlng).addTo(map)
@@ -24,28 +50,20 @@ function onLocationError(e) {
 }
 map.on('locationerror', onLocationError);
 
-// a source of items that shall be displayed on the map as markers
-var sourceArray = [
-{ "id" : "1",
-"lat" : "50.094971",
-"lon" : "14.415763"},
-{ "id" : "2",
-"lat" : "50.032971",
-"lon" : "14.426763"},
-{ "id" : "3",
-"lat" : "50.011971",
-"lon" : "14.655763"}
-]
 
-// we'll store the markers in here
-var poiArray = []
-
-sourceArray.forEach(function (value) {
-    poiArray.push(
-        // add marker to map
-        L.marker([value.lat, value.lon]).addTo(map)
+function createMarkers(error, sourceArray) {
+    if (!error){
+    sourceArray = JSON.parse(sourceArray);
+    sourceArray.forEach(function(value) {
+        poiArray.push(
+            // add marker to map
+            L.marker([value.latitude, value.longitude]).addTo(map)
             // show marker popup
-            .bindPopup(value.id).openPopup()
-    );
+            .bindPopup(value.description).openPopup()
+        );
+    }); 
+    }
+};
 
-});
+
+ajax(APItrees,createMarkers);
