@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -46,4 +46,24 @@
   <div id="app"></div>
   </body>
 <script src="./js/show-tree-details.js"></script>
-</html>
+</html> -->
+
+<v-ons-page id="ShowTreeDetailsPage">
+    <custom-toolbar :pop="pop" :back-label="'WelcomePage'">Tree Details</custom-toolbar>
+    <article style="text-align: center">
+        <header>
+            <img :src="treeImageURL" alt="The image you are looking for is unavailable.">
+        </header>
+        <section>
+            <h1>
+                Type: {{ vm.$data.treeType }}
+            </h1>
+            <h3>
+                Description
+            </h3>
+            <p>
+                {{ treeDescription }}
+            </p>
+        </section>
+    </article>
+</v-ons-page>
