@@ -40,7 +40,7 @@ const welcomePage = {
     pop,
     push() {
       this.pageStack.push(showTreeDetails);
-      getRequest("http://localhost:3000/api/v1/tree/" + this.treeID);
+      getRequestandUpdateTreeDetails("http://localhost:3000/api/v1/tree/" + this.treeID);
     }
   },
   props: ['pageStack', 'treeID'],
