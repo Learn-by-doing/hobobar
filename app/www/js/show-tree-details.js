@@ -1,41 +1,22 @@
-// var vm = new Vue({
-//   el: '#app',
-//   template:
-//   '<v-ons-page>\
-//     <v-ons-toolbar>\
-//       <div class="left">\
-//       <v-ons-back-button :on-click="pop">BACK</v-ons-back-button>\
-//     </div>\
-//       <div class="center">Tree Details</div>\
-//     </v-ons-toolbar>\
-//     <article style="text-align: center">\
-//     <header>\
-//     <img src="" alt="The image you are looking for is unavailable.">\
-//     </header>\
-//     <section>\
-//     <h1>\
-//       Type: {{ treeType }} \
-//     </h1>\
-//     <h3>\
-//       Description\
-//     </h3>\
-//     <p>\
-//       {{ treeDescription }}\
-//     </p>\
-//     </section>\
-//     </article>\
-//   </v-ons-page>'
-// });
+// This should probably be merged in index.js as we also deal with the navigation.
 
-// var treeType = "Apple Tree";
-// var treeDescription = "A tree that bears apples.";
+function getRequestandUpdateTreeDetails(url) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var data = JSON.parse(this.responseText);
+      vm.updateTreeDetails({
+        treeType: data.type,
+        treeDescription: data.description,
+        treeImageURL: data.filename
+      });
+    } 
+  };
+  
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
 
-var id = 1;
-var xhttp = new XMLHttpRequest();
-
-xhttp.open("GET", "http://localhost:3000/api/v1/tree/1", true);
-xhttp.send();
-alert(xhttp.responseText);
 
 const pop = function() {
   this.pageStack.pop();
@@ -49,8 +30,8 @@ const customToolbar = {
 const showTreeDetails = {
   template: '#ShowTreeDetails',
   methods: { pop },
-  props: ['pageStack', 'treeType', 'treeDescription'],
-  components: { customToolbar }
+  props: ['pageStack', 'treeDescription', 'treeType', 'treeImageURL'],
+  components: { customToolbar },
 };
 
 const welcomePage = {
@@ -59,9 +40,10 @@ const welcomePage = {
     pop,
     push() {
       this.pageStack.push(showTreeDetails);
+      getRequest("http://localhost:3000/api/v1/tree/" + this.treeID);
     }
   },
-  props: ['pageStack'],
+  props: ['pageStack', 'treeID'],
   components: { customToolbar }
 };
 
@@ -70,8 +52,19 @@ var vm = new Vue({
   template: '#main',
   data() {
     return {
-      pageStack: [welcomePage]
-    };   
+      pageStack: [welcomePage],
+	    treeDescription: "Default tree description.",
+	    treeType: "Default tree type.",
+	    treeImageURL: "Default file URL",
+      treeID: "1" // Default tree ID
+    };
+  },
+  methods: {
+    updateTreeDetails: function(data) {
+      this.treeDescription = data.treeDescription;
+      this.treeType = data.treeType;
+      this.treeImageURL = data.treeImageURL;
+    } 
   }
 });
 
