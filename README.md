@@ -50,3 +50,25 @@ GRANT USAGE ON * . * TO  'hobobar_local'@'localhost' IDENTIFIED BY  'password' W
 GRANT ALL PRIVILEGES ON  `hobobar_local` . * TO  'hobobar_local'@'localhost';
 ```
 
+Running a Cordova App 
+=============
+
+- Make sure everything is up to date using Git
+
+Start the server first:
+
+- Go to your local hobobar/server directory 
+
+- Run `npm install`
+
+- Run `npm start` to start the node server
+
+Run your app now:
+
+- Go to your hobobar/app directory
+
+- Run `cordova platform add ios` to add iOS platform. You can also use Android and/or Browser
+
+- Make sure you have Android SDK to emulate Android and XCode to emulate iOS
+
+- Run `cordova emulate iOS` to run an app in an emulator
