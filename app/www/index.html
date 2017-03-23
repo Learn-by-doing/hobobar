@@ -26,7 +26,7 @@
     <body>
 
         <v-ons-template id="main">
-            <v-ons-navigator>
+            <v-ons-navigator :page-stack="pageStack">
                 <div :is="page" v-for="page in pageStack" :page-stack="pageStack" :tree-type="treeType" :tree-description="treeDescription" :tree-image-u-r-l="treeImageURL" :tree-i-d="treeID"></div>
             </v-ons-navigator>
         </v-ons-template>
@@ -52,7 +52,6 @@
                 <button type="button" id="new-tree">Add</button>
 
                 <v-ons-button @click="push">Push ShowTreeDetails</v-ons-button>
-
 
             </v-ons-page>
         </v-ons-template>
