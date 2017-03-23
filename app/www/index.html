@@ -27,7 +27,7 @@
 
         <v-ons-template id="main">
             <v-ons-navigator :page-stack="pageStack">
-                <div :is="page" v-for="page in pageStack" :page-stack="pageStack" :tree-type="treeType" :tree-description="treeDescription" :tree-image-u-r-l="treeImageURL" :tree-i-d="treeID"></div>
+                <div :is="page" v-for="page in pageStack" :page-stack="pageStack" :tree-type="treeType" :tree-description="treeDescription" :tree-image-u-r-l="treeImageURL" :tree-i-d="treeID" :error="error"></div>
             </v-ons-navigator>
         </v-ons-template>
 
@@ -51,6 +51,7 @@
 
                 <button type="button" id="new-tree">Add</button>
 
+                <input name="treeID" ref="treeIDInput" placeholder="Enter the ID of the tree">
                 <v-ons-button @click="push">Push ShowTreeDetails</v-ons-button>
 
             </v-ons-page>
@@ -59,22 +60,28 @@
         <v-ons-template id="ShowTreeDetails">
             <v-ons-page id="ShowTreeDetailsPage">
                 <custom-toolbar :pop="pop" :back-label="'WelcomePage'">Tree Details</custom-toolbar>
-                <article style="text-align: center">
-                    <header>
-                        <img :src="treeImageURL" alt="The image you are looking for is unavailable.">
-                    </header>
-                    <section>
-                        <h1>
-                            Type: {{ treeType }}
-                        </h1>
-                        <h3>
-                            Description
-                        </h3>
-                        <p>
-                            {{ treeDescription }}
-                        </p>
-                    </section>
-                </article>
+                <div :error="error">
+                    <div v-if="error != '' " style="text-align: center;">
+                        {{ error }}
+                    </div>
+                
+                    <article v-else  style="text-align: center">
+                        <header>
+                            <img :src="treeImageURL" alt="The image you are looking for is unavailable.">
+                        </header>
+                        <section>
+                            <h1>
+                                Type: {{ treeType }}
+                            </h1>
+                            <h3>
+                                Description
+                            </h3>
+                            <p>
+                                {{ treeDescription }}
+                            </p>
+                        </section>
+                    </article>
+                </div>
             </v-ons-page>
         </v-ons-template>
 

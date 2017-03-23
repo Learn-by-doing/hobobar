@@ -10,6 +10,15 @@ function getRequestandUpdateTreeDetails(url) {
         treeDescription: data.description,
         treeImageURL: data.filename
       });
+      vm.updateError("");
+    }
+    else if (this.readyState == 4 && this.status == 404) {
+      vm.updateError("There was a problem with your request. Please try again later.");
+      vm.updateTreeDetails({
+        treeType: "",
+        treeDescription: "",
+        treeImageURL: ""
+      });
     } 
   };
   
@@ -30,7 +39,7 @@ const customToolbar = {
 const showTreeDetails = {
   template: '#ShowTreeDetails',
   methods: { pop },
-  props: ['pageStack', 'treeDescription', 'treeType', 'treeImageURL'],
+  props: ['pageStack', 'treeDescription', 'treeType', 'treeImageURL', 'error'],
   components: { customToolbar },
 };
 
@@ -40,6 +49,7 @@ const welcomePage = {
     pop,
     push() {
       this.pageStack.push(showTreeDetails);
+      this.treeID = this.$refs.treeIDInput.value;
       getRequestandUpdateTreeDetails("http://localhost:3000/api/v1/tree/" + this.treeID);
     }
   },
@@ -56,7 +66,8 @@ var vm = new Vue({
 	    treeDescription: "Default tree description.",
 	    treeType: "Default tree type.",
 	    treeImageURL: "Default file URL",
-      treeID: "1" // Default tree ID
+      treeID: "3", // Default tree ID
+      error: ""
     };
   },
   methods: {
@@ -64,7 +75,11 @@ var vm = new Vue({
       this.treeDescription = data.treeDescription;
       this.treeType = data.treeType;
       this.treeImageURL = data.treeImageURL;
-    } 
+    },
+    updateError: function(error) {
+      this.error = error;
+    }
+
   }
 });
 
