@@ -1,0 +1,8 @@
+{
+	"default": [
+		"build"
+	],
+	"build": [
+		"newer:copy:deps"
+	]
+}

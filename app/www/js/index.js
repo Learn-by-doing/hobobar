@@ -1,5 +1,46 @@
 document.addEventListener('deviceready', function() {    // The device is ready
 
+    var newTreeButton = document.getElementById('new-tree');
+
+    newTreeButton.addEventListener('click', function() {
+        // Run camera.
+        navigator.camera.getPicture(function(fileURL) {
+            // success
+            uploadPhoto(fileURL);
+        }, function(error) {
+            // error
+            alert(error);
+        }, {
+            destinationType: navigator.camera.DestinationType.FILE_URI
+        });
+    });
+
+    function uploadPhoto(imageURI) {
+
+        var options = new FileUploadOptions();
+        options.fileKey="image";
+        options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+        options.mimeType="image/jpeg";
+
+        var params = {
+            latitude: '50.083881',
+            longitude: '14.433566',
+            type: 'fruit?',
+            description: 'it\'s a tree!',
+        };
+
+        options.params = params;
+        options.chunkedMode = false;
+
+        var ft = new FileTransfer();
+        ft.upload(imageURI, 'http://localhost:3000/api/v1/tree', function() {
+            // success?
+            alert('success!');
+        }, function(error) {
+            alert(error);
+        }, options);
+    }
+
     (function(window) {
 
         var watchID = null;

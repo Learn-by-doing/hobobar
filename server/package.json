@@ -1,7 +1,7 @@
 {
-  "name": "hobobar",
+  "name": "hobobar-server",
   "version": "1.0.0",
-  "description": "Map locations of edible (fruit/nut/berry) trees in your city",
+  "description": "The API server for the Hobobar mobile app.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
