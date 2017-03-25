@@ -2,7 +2,5 @@
 
 module.exports = function(app) {
 
-	return {
-
-	};
+	require('./cors')(app);
 };
