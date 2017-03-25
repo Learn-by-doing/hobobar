@@ -13,6 +13,9 @@
     "grunt-contrib-copy": "1.0.0",
     "grunt-newer": "1.2.0",
     "load-grunt-config": "0.19.2",
-    "time-grunt": "1.4.0"
+    "onsenui": "2.2.0",
+    "time-grunt": "1.4.0",
+    "vue": "2.2.4",
+    "vue-onsenui": "2.0.0-alpha.1"
   }
 }

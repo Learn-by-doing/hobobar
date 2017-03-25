@@ -10,34 +10,99 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+       <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
         <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <!-- Dependencies: -->
+        <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+
         <title>HoboBar</title>
     </head>
     <body>
-        <div class="app">
 
-            <!-- scaffolding to test location services - start -->
-            <h3>Get current position</h3>
-            <button type="button" id="positionCurrentButton">Get position</button>
-            <div id="positionCurrent"></div>
+        <v-ons-template id="main">
+            <v-ons-navigator :page-stack="pageStack">
+                <div :is="page" v-for="page in pageStack" :page-stack="pageStack" :tree-type="treeType" :tree-description="treeDescription" :tree-image-u-r-l="treeImageURL" :tree-i-d="treeID" :error="error"></div>
+            </v-ons-navigator>
+        </v-ons-template>
 
-            <h3>Rolling current position</h3>
-            <button type="button" id="positionRollingStartButton">Start watching</button>
-            <button type="button" id="positionRollingStopButton">Stop watching</button>
-            <div id="positionRolling"></div>
-            <!-- scaffolding to test location services - end -->
+        <v-ons-template id="WelcomePage">
+            <v-ons-page>
+                <custom-toolbar :pop="pop">Welcome Page</custom-toolbar>
 
-            <!-- scaffolding only, not a proper way to navigate to other pages -->
-            <a href="./map.html">Map test</a>
+                <!-- scaffolding to test location services - start -->
+                <h3>Get current position</h3>
+                <button type="button" id="positionCurrentButton">Get position</button>
+                <div id="positionCurrent"></div>
 
-            <button type="button" id="new-tree">Add</button>
+                <h3>Rolling current position</h3>
+                <button type="button" id="positionRollingStartButton">Start watching</button>
+                <button type="button" id="positionRollingStopButton">Stop watching</button>
+                <div id="positionRolling"></div>
+                <!-- scaffolding to test location services - end -->
 
-        </div>
+                <!-- scaffolding only, not a proper way to navigate to other pages -->
+                <a href="./map.html">Map test</a>
+
+                <button type="button" id="new-tree">Add</button>
+
+                <input name="treeID" ref="treeIDInput" placeholder="Enter the ID of the tree">
+                <v-ons-button @click="push">Push ShowTreeDetails</v-ons-button>
+
+            </v-ons-page>
+        </v-ons-template>
+
+        <v-ons-template id="ShowTreeDetails">
+            <v-ons-page id="ShowTreeDetailsPage">
+                <custom-toolbar :pop="pop" :back-label="'WelcomePage'">Tree Details</custom-toolbar>
+                <div :error="error">
+                    <div v-if="error != '' " style="text-align: center;">
+                        {{ error }}
+                    </div>
+                
+                    <article v-else  style="text-align: center">
+                        <header>
+                            <img :src="treeImageURL" alt="The image you are looking for is unavailable.">
+                        </header>
+                        <section>
+                            <h1>
+                                Type: {{ treeType }}
+                            </h1>
+                            <h3>
+                                Description
+                            </h3>
+                            <p>
+                                {{ treeDescription }}
+                            </p>
+                        </section>
+                    </article>
+                </div>
+            </v-ons-page>
+        </v-ons-template>
+
+        <v-ons-template id="custom-toolbar">
+          <v-ons-toolbar>
+            <div class="left">
+              <v-ons-back-button :on-click="pop">{{ backLabel }}</v-ons-back-button>
+            </div>
+            <div class="center"><slot></slot></div>
+          </v-ons-toolbar>
+        </v-ons-template>
+
+        <div class="app"></div>
+
         <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- Dependencies: -->
+        <script src="lib/vue/vue.js"></script>
+        <script src="lib/onsenui/js/onsenui.js"></script>
+        <script src="lib/vue-onsenui/vue-onsenui.js"></script>
+
         <script type="text/javascript" src="js/index.js"></script>
 
     </body>
