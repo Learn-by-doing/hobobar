@@ -67,8 +67,12 @@ Run your app now:
 
 - Go to your hobobar/app directory
 
-- Run `cordova platform add ios` to add iOS platform. You can also use Android and/or Browser
+- Run `npm install` to install all dependencies incl. grunt
 
-- Make sure you have Android SDK to emulate Android and XCode to emulate iOS
+- Run `grunt`
+
+- Run `cordova platform add ios` to add iOS platform. You can also use `cordova platform add browser` or `cordova platform add android`
+
+- Make sure you have Android SDK to emulate Android and XCode to emulate iOS if you choose to test there
 
 - Run `cordova emulate iOS` to run an app in an emulator
