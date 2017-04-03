@@ -1,5 +1,27 @@
-Hobobar project readme
-======================
+# Hobobar project readme
+
+## Getting Started 
+
+Cordova app:
+```
+git clone https://github.com/Learn-by-doing/hobobar.git
+cd hobobar/app
+npm install -g cordova
+npm install
+grunt
+cordova platform add browser
+cordova run browser
+```
+- Run `cordova platform add ios` to add iOS platform. You can also use `cordova platform add android`
+- Make sure you have Android SDK to emulate Android and XCode to emulate iOS if you choose to test there
+- Run `cordova emulate iOS` to run an app in an emulator
+
+Server:
+```
+cd hobobar/server
+npm install
+npm start
+```
 
 # Scope of the project
 We're creating an app that allows you to see where fruit (nut) trees are located. We're also let the user save a new tree location. The project is meant to be quick hack, not a full product.
@@ -50,29 +72,3 @@ GRANT USAGE ON * . * TO  'hobobar_local'@'localhost' IDENTIFIED BY  'password' W
 GRANT ALL PRIVILEGES ON  `hobobar_local` . * TO  'hobobar_local'@'localhost';
 ```
 
-Running a Cordova App 
-=============
-
-- Make sure everything is up to date using Git
-
-Start the server first:
-
-- Go to your local hobobar/server directory 
-
-- Run `npm install`
-
-- Run `npm start` to start the node server
-
-Run your app now:
-
-- Go to your hobobar/app directory
-
-- Run `npm install` to install all dependencies incl. grunt
-
-- Run `grunt`
-
-- Run `cordova platform add ios` to add iOS platform. You can also use `cordova platform add browser` or `cordova platform add android`
-
-- Make sure you have Android SDK to emulate Android and XCode to emulate iOS if you choose to test there
-
-- Run `cordova emulate iOS` to run an app in an emulator
