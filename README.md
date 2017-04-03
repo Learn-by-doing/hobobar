@@ -8,6 +8,7 @@ git clone https://github.com/Learn-by-doing/hobobar.git
 cd hobobar/app
 npm install -g cordova
 npm install
+npm install -g grunt-cli
 grunt
 cordova platform add browser
 cordova run browser
