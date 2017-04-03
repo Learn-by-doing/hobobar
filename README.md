@@ -12,9 +12,9 @@ grunt
 cordova platform add browser
 cordova run browser
 ```
-- Run `cordova platform add ios` to add iOS platform. You can also use `cordova platform add android`
-- Make sure you have Android SDK to emulate Android and XCode to emulate iOS if you choose to test there
-- Run `cordova emulate iOS` to run an app in an emulator
+* Note that [Google Chrome](https://www.google.com/chrome/) is required to run the app with `cordova run browser`.
+* Run `cordova platform add ios` to add iOS platform. Then run the app with `cordova emulate iOS`. This requires XCode.
+* You can also run `cordova platform add android` to add Android. This requires Android SDK.
 
 Server:
 ```
