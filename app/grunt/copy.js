@@ -16,6 +16,11 @@ module.exports = {
 		*/
 			{
 				nonull: true,
+				src: 'node_modules/jquery/dist/jquery.js',
+				dest: 'www/lib/jquery/jquery.js'
+			},
+			{
+				nonull: true,
 				expand: true,
 				cwd: 'node_modules/onsenui/',
 				src: [
