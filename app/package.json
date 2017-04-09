@@ -16,7 +16,9 @@
     "load-grunt-config": "0.19.2",
     "onsenui": "2.2.0",
     "time-grunt": "1.4.0",
+    "underscore": "1.8.3",
     "vue": "2.2.4",
-    "vue-onsenui": "2.0.0-alpha.1"
+    "vue-onsenui": "2.0.0-alpha.1",
+    "vue2-leaflet": "0.0.44"
   }
 }

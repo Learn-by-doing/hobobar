@@ -41,56 +41,68 @@ document.addEventListener('deviceready', function() {    // The device is ready
         }, options);
     }
 
-    (function(window) {
+    function getLocation() {
+      var promise = $.Deferred();
+      navigator.geolocation.getCurrentPosition(function(result) {
+        promise.resolve({
+          lat: result.coords.latitude,
+          long: result.coords.longitude
+        });
+      }, promise.reject);
+      return promise;
+    }
 
-        var watchID = null;
+    function getTrees() {
+      var promise = $.Deferred();
+      var url = makeApiUrl('v1/trees');
+      $.get(url).then(function(data) {
+        promise.resolve(data);
+      }).fail(function() {
+        // Resolve with an empty array of trees in case of failure.
+        promise.resolve([]);
+      });
+      return promise;
+    }
 
-        var position = {
-            static: function(callback) {
-                function onSuccess(position) {
-                    callback(null, position)
-                }
+    function makeApiUrl(uri) {
+      var url = location.protocol + '//' + location.hostname;
+      if (location.port) {
+        url += ':' + location.port;
+      }
+      return url + '/api/' + uri;
+    }
 
-                // onError Callback receives a PositionError object
-                function onError(error) {
-                    callback(error)
-                }
-                navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            },
-            start: function(callback) {
-                function onSuccess(position) {
-                    callback(null, position)
-                }
-                // onError Callback receives a PositionError object
-                function onError(error) {
-                    callback(error)
-                }
-                // make sure there's only one process at a time:
-                if (watchID) {
-                    position.stop(watchID);
-                }
-                // see 'quirks at' https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-geolocation/
-                // https://tol8.blogspot.cz/2014/03/how-to-get-reliable-geolocation-data-on.html
-                watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
-                    maximumAge: 3000,
-                    timeout: 15000,
-                    enableHighAccuracy: true
-                });
-            },
-            stop: function(watchID) {
-                navigator.geolocation.clearWatch(watchID);
-                console.log("watcher stopped");
-            }
-        }
+    // Get location and tree data in parallel.
+    // Excute the callback when both are done.
+    $.when(getLocation(), getTrees()).then(function(location, trees) {
 
+      var markers = [location];
+      _.each(trees, function(tree) {
+        markers.push({
+          lat: tree.latitude,
+          long: tree.longitude
+        });
+      });
 
-    })(window);
-
-    (function() {
+      Vue.component('v-map', Vue2Leaflet.Map);
+      Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
+      Vue.component('v-marker', Vue2Leaflet.Marker);
 
       const customToolbar = {
       template: '#custom-toolbar',
       props: ['backLabel']
+      };
+
+      const customMap = {
+        template: '#custom-map',
+        data() {
+          return {
+            zoomLevel: 13,
+            lat: location.lat,
+            long: location.long,
+            markers: markers
+          };
+        }
       };
 
       const homepage = {
@@ -104,8 +116,8 @@ document.addEventListener('deviceready', function() {    // The device is ready
           }
         },
         props: ['pageStack'],
-        components: { customToolbar }
-      };      
+        components: { customToolbar, customMap }
+      };
 
       const confirmPhoto = {
         template: '#confirmPhoto',
@@ -159,9 +171,7 @@ document.addEventListener('deviceready', function() {    // The device is ready
         }
       });
 
-
-
-    })();
+    }).fail(console.log);
 
 }, false);
 
