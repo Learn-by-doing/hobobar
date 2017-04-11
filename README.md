@@ -1,10 +1,38 @@
-# Hobobar project readme
+# Hobobar
+
+Will be an app that allows you to see where fruit (or nut) trees are located. It will also allow the user to tag new trees in the system.
+
+The scope is meant to be minimal. There will be no 'admin' interface, no accounts, and no editing of content. Anyone can add new trees.
+
+
+## Requirements
+
+* [git](https://git-scm.com/)
+* [nodejs](https://nodejs.org/en/)
+* Mobile App:
+  * [Cordova](https://cordova.apache.org/)
+  * [grunt-cli](https://gruntjs.com/getting-started)
+* Web Server:
+  * [MySQL](https://www.mysql.com/) - installation instructions will vary based on your operating system
+
 
 ## Getting Started 
 
-Cordova app:
+Before continuing, be sure to download and install the project [requirements](#requirements).
+
+The project has two parts:
+* A mobile app which uses [Cordova](https://cordova.apache.org/) to build our web app for Android, iOS, and browsers.
+* A web server which provides a web API for the mobile app. It stores the tree data and images.
+
+To get the project files and start working locally, you must first "clone" the project:
 ```
 git clone https://github.com/Learn-by-doing/hobobar.git
+```
+
+### Mobile App Setup
+
+Below are all the commands that you will need to get the mobile app running locally:
+```
 cd hobobar/app
 npm install -g cordova grunt-cli
 npm install
@@ -16,59 +44,21 @@ cordova run browser
 * Run `cordova platform add ios` to add iOS platform. Then run the app with `cordova emulate iOS`. This requires XCode.
 * You can also run `cordova platform add android` to add Android. This requires Android SDK.
 
-Server:
+
+### Web Server Setup
+
+You will need [MySQL](https://www.mysql.com/) to run the server.
+
+Once you have MySQL installed, you will need to setup the local database. Run the following SQL queries to create the database and user:
+```sql
+CREATE DATABASE IF NOT EXISTS hobobar_local;
+GRANT USAGE ON * . * TO  'hobobar_local'@'localhost' IDENTIFIED BY 'password' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+GRANT ALL PRIVILEGES ON  `hobobar_local` . * TO  'hobobar_local'@'localhost';
+```
+
+Below are the commands you will need to get the web server running locally:
 ```
 cd hobobar/server
 npm install
 npm start
 ```
-
-# Scope of the project
-We're creating an app that allows you to see where fruit (nut) trees are located. We're also let the user save a new tree location. The project is meant to be quick hack, not a full product.
-
-There is no 'admin' interface to edit content. There are no accounts. Anyone can store tree data. When a new tree is created, there is no way of editing it afterwards. 
-
-# Components of the project:
-- app
-- server for storing and serving data
-
-# Functionality
-
-## Record tree location
-We want to store:
-- location
-- image 
-- category / type of tree
-
-## Show tree locations and details
-- we need a map for tiles
-- we need to show the trees as icons on that map
-- we need a popup / overlay / ... to show the details
-- we won't have the option to filter the map anyhow
-
-
-# Phone features we're going to use
-- access GPS / loction 
-- access the camera
-- data connection (online only)
-we won't have a fallback if these are missing
-
-# Further features
-- map - for the map data we are going to try to use OSM 
-- icon(s) - we can use https://www.iconfinder.com/ if the licence allows
-- UI - decide how to build it - that's still a TODO
-
-
-Installation
-=============
-
-## Database Setup
-
-Once you have MySQL installed, you will need to setup the local database. Run the following SQL queries to create the database and user:
-```sql
-CREATE DATABASE IF NOT EXISTS hobobar_local;
-GRANT USAGE ON * . * TO  'hobobar_local'@'localhost' IDENTIFIED BY  'password' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
-
-GRANT ALL PRIVILEGES ON  `hobobar_local` . * TO  'hobobar_local'@'localhost';
-```
-
