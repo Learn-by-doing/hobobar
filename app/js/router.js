@@ -9,6 +9,7 @@ app.Router = (function() {
 		routes: {
 			'home': 'home',
 			'credits': 'credits',
+			'add' : 'add',
 
 			// For un-matched route, default to:
 			'*notFound': 'notFound'
@@ -24,11 +25,16 @@ app.Router = (function() {
 			app.mainView.renderView('Home');
 		},
 
-        credits: function() {
+		credits: function() {
 
-            app.mainView.renderView('Credits');
-        }
+			app.mainView.renderView('Credits');
+		},
 
-    });
+		add: function() {
+
+			app.mainView.renderView('AddTree');
+		}
+
+	});
 
 })();
