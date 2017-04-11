@@ -8,6 +8,7 @@ app.Router = (function() {
 
 		routes: {
 			'home': 'home',
+			'confirmation': 'confirmation',
 			'credits': 'credits',
 			'add' : 'add',
 
@@ -25,7 +26,12 @@ app.Router = (function() {
 			app.mainView.renderView('Home');
 		},
 
-		credits: function() {
+		confirmation: function() {
+
+			app.mainView.renderView('Confirmation');
+		},
+		
+    credits: function() {
 
 			app.mainView.renderView('Credits');
 		},
