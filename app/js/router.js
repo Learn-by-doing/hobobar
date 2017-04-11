@@ -8,6 +8,7 @@ app.Router = (function() {
 
 		routes: {
 			'home': 'home',
+			'confirmation': 'confirmation',
 
 			// For un-matched route, default to:
 			'*notFound': 'notFound'
@@ -21,7 +22,12 @@ app.Router = (function() {
 		home: function() {
 
 			app.mainView.renderView('Home');
-		}
+		},
+
+        confirmation: function() {
+
+            app.mainView.renderView('Confirmation');
+        }
 	});
 
 })();
