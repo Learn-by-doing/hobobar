@@ -10,10 +10,11 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: https://*.tile.openstreetmap.org;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/all.css">
         <title>HoboBar</title>
     </head>
     <body>
@@ -29,7 +30,7 @@
                 <a id="menu-toggle"></a>
             </div>
             <div id="menu">
-                <a class="menu-item" href="#about">About</a>
+                <a class="menu-item" href="#credits">Credits</a>
                 <a class="menu-item" href="#confirmation">Confirmation</a>
             </div>
             <div id="menu-cover"></div>
@@ -39,6 +40,24 @@
         </script>
 
         <script type="text/html" id="template-home">
+            <div id="map"></div>
+            <a href="#add-tree" id="add-tree">Add tree</a>
+        </script>
+
+        <script type="text/html" id="template-credits">
+        <h1>Credits</h1>
+        app created by <br />
+        <a href="#" onclick="cordova.InAppBrowser.open('https://github.com/Learn-by-doing/hobobar', '_system');">https://github.com/Learn-by-doing/hobobar</a>
+        </script>
+
+        <script type="text/html" id="template-add-tree">
+            <label><input type="radio" name="type" value="tree">Tree</label>
+            <label><input type="radio" name="type" value="bush">Bush</label>
+            <label><input type="radio" name="type" value="herb">Herb</label>
+            <br>
+            <br>
+            <br>
+            <input type="text" name="description" placeholder="Description">
         </script>
 
         <script type="text/html" id="template-confirmation">

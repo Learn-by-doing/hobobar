@@ -9,6 +9,8 @@ app.Router = (function() {
 		routes: {
 			'home': 'home',
 			'confirmation': 'confirmation',
+			'credits': 'credits',
+			'add' : 'add',
 
 			// For un-matched route, default to:
 			'*notFound': 'notFound'
@@ -24,10 +26,21 @@ app.Router = (function() {
 			app.mainView.renderView('Home');
 		},
 
-        confirmation: function() {
+		confirmation: function() {
 
-            app.mainView.renderView('Confirmation');
-        }
+			app.mainView.renderView('Confirmation');
+		},
+		
+    credits: function() {
+
+			app.mainView.renderView('Credits');
+		},
+
+		add: function() {
+
+			app.mainView.renderView('AddTree');
+		}
+
 	});
 
 })();
