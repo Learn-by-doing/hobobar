@@ -56,17 +56,25 @@
 
 
 
-        <template id="fillDetails">
+		<template id="fillDetails">
 			<v-ons-page>
-	    		<custom-toolbar :back-label="'Back'">Fill in tree details</custom-toolbar>
-	    		<p style="text-align: center">
-	      		Here goes the form for the tree details
-	      		<v-ons-button @click="home">Cancel</v-ons-button>
-	      		<v-ons-button @click="save">Save</v-ons-button>
-	    		</p>
-	  		</v-ons-page>
+				<custom-toolbar :back-label="'Back'">Fill in tree details</custom-toolbar>
+				<p style="text-align: center">
+				<br>
+				<br>
+				<v-ons-input type="radio" name="type" value="tree" float>Tree</v-ons-input>
+				<v-ons-input type="radio" name="type" value="bush" float>Bush</v-ons-input>
+				<v-ons-input type="radio" name="type" value="herb" float>Herb</v-ons-input>
+				<br>
+				<br>
+				<v-ons-input type="text" name="description" placeholder="Description" float></v-ons-input>
+				<br>
+				<br>
+				<v-ons-button @click="home">Cancel</v-ons-button>
+				<v-ons-button @click="save">Save</v-ons-button>
+				</p>
+			</v-ons-page>
 		</template>
-
 
         <template id="treeSaved">
 			<v-ons-page>
