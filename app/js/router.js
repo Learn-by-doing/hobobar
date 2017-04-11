@@ -8,6 +8,7 @@ app.Router = (function() {
 
 		routes: {
 			'home': 'home',
+			'credits': 'credits',
 
 			// For un-matched route, default to:
 			'*notFound': 'notFound'
@@ -21,7 +22,13 @@ app.Router = (function() {
 		home: function() {
 
 			app.mainView.renderView('Home');
-		}
-	});
+		},
+
+        credits: function() {
+
+            app.mainView.renderView('Credits');
+        }
+
+    });
 
 })();
