@@ -1,0 +1,22 @@
+.view.home #map {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+.view.home #add-tree {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 125;
+	display: block;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	background: #1f79c8;
+	padding: 12px 0;
+}
+.view.home #add-tree:hover {
+	text-decoration: none;
+}
