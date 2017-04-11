@@ -8,6 +8,7 @@ app.Router = (function() {
 
 		routes: {
 			'home': 'home',
+			'add' : 'add',
 
 			// For un-matched route, default to:
 			'*notFound': 'notFound'
@@ -21,6 +22,11 @@ app.Router = (function() {
 		home: function() {
 
 			app.mainView.renderView('Home');
+		},
+
+		add: function() {
+
+			app.mainView.renderView('AddTree');
 		}
 	});
 
