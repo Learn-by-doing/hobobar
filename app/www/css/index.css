@@ -1,0 +1,13 @@
+.add-tree-button.button {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 1000;
+	display: block;
+	width: 100%;
+	text-align: center;
+	background-color: rgba(24, 103, 194, 1);
+	border-radius: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+}

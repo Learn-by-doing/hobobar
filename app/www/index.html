@@ -10,7 +10,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-	    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+	    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: http://*.tile.osm.org;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
         <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+        <link rel="stylesheet" href="lib/vue2-leaflet/leaflet.css">
 
         <title>HoboBar</title>
     </head>
@@ -33,12 +34,8 @@
         <template id="homepage">
 			<v-ons-page>
 	    		<custom-toolbar>Homepage</custom-toolbar>
-	    		<p style="text-align: center">
-	      		The map goes here
-	      		<v-ons-button @click="add">Add tree</v-ons-button>
-	      		<v-ons-button @click="credits">Credits page</v-ons-button>
-	    		</p>
-
+				<custom-map></custom-map>
+	      		<v-ons-button class="add-tree-button" @click="add">Add tree</v-ons-button>
 	  		</v-ons-page>
 		</template>
 
@@ -99,14 +96,24 @@
 		  </v-ons-toolbar>
 		</template>
 
+		<template id="custom-map">
+			<v-map :zoom="zoomLevel" :center="[lat, long]">
+				<v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
+				<v-marker v-for="marker in markers" :lat-lng="[marker.lat, marker.long]"></v-marker>
+			</v-map>
+		</template>
+
 		<!-- Vue app container -->
         <div id="app"></div>
 
         <script src="cordova.js"></script>
         <script src="lib/jquery/jquery.js"></script>
+        <script src="lib/underscore/underscore.js"></script>
         <script src="lib/vue/vue.js"></script>
         <script src="lib/onsenui/js/onsenui.js"></script>
         <script src="lib/vue-onsenui/vue-onsenui.js"></script>
+        <script src="lib/vue2-leaflet/leaflet.js"></script>
+        <script src="lib/vue2-leaflet/vue2-leaflet.js"></script>
         <script src="js/index.js"></script>
 
     </body>

@@ -21,6 +21,11 @@ module.exports = {
 			},
 			{
 				nonull: true,
+				src: 'node_modules/underscore/underscore.js',
+				dest: 'www/lib/underscore/underscore.js'
+			},
+			{
+				nonull: true,
 				expand: true,
 				cwd: 'node_modules/onsenui/',
 				src: [
@@ -42,6 +47,28 @@ module.exports = {
 				nonull: true,
 				src: 'node_modules/vue-onsenui/dist/vue-onsenui.js',
 				dest: 'www/lib/vue-onsenui/vue-onsenui.js'
+			},
+			{
+				nonull: true,
+				expand: true,
+				flatten: true,
+				cwd: 'node_modules/vue2-leaflet/',
+				src: [
+					'dist/vue2-leaflet.js',
+					'node_modules/leaflet/dist/leaflet.js',
+					'node_modules/leaflet/dist/leaflet.css'
+				],
+				dest: 'www/lib/vue2-leaflet/'
+			},
+			{
+				nonull: true,
+				expand: true,
+				flatten: false,
+				cwd: 'node_modules/vue2-leaflet/node_modules/leaflet/dist/images/',
+				src: [
+					'**'
+				],
+				dest: 'www/lib/vue2-leaflet/images/'
 			}
 		]
 	}
