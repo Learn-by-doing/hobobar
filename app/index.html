@@ -10,25 +10,38 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:* gap: https://ssl.gstatic.com https://unpkg.com 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://unpkg.com; media-src *; img-src 'self' https://*.tile.openstreetmap.org https://openlayers.org https://unpkg.com data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:3000/api/v1/ data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-        <style>#map { height: 380px; }</style>
         <title>HoboBar</title>
     </head>
     <body>
-        <div class="app">
 
-            <div id="map"></div>
+        <div id="app"></div>
 
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-        <script type="text/javascript" src="js/mapper.js"></script>
+        <noscript>
+            <p class="page-description">HoboBar requires JavaScript to function.</p>
+        </noscript>
+
+        <script type="text/html" id="template-main">
+            <div id="header">
+                <a id="menu-toggle"></a>
+            </div>
+            <div id="menu">
+                <a class="menu-item" href="#about">About</a>
+            </div>
+            <div id="menu-cover"></div>
+            <div id="view">
+                <div id="view-content"></div>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-home">
+        </script>
+
+        <script src="cordova.js"></script>
+        <script src="js/all.js"></script>
 
     </body>
 </html>

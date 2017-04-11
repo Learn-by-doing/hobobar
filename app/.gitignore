@@ -2,4 +2,4 @@ hooks/
 node_modules/
 platforms/
 plugins/
-www/lib/
+www/

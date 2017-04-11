@@ -3,6 +3,7 @@
 		"build"
 	],
 	"build": [
-		"newer:copy:deps"
+		"newer:concat",
+		"newer:copy"
 	]
 }
