@@ -4,6 +4,7 @@
   "description": "The client for the Hobobar mobile app.",
   "main": "index.js",
   "scripts": {
+    "start": "grunt build && cordova run browser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,8 +12,10 @@
   "dependencies": {
     "backbone": "1.3.3",
     "grunt": "1.0.1",
+    "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-copy": "1.0.0",
     "grunt-newer": "1.2.0",
+    "handlebars": "4.0.6",
     "jquery": "3.2.1",
     "load-grunt-config": "0.19.2",
     "time-grunt": "1.4.0",
