@@ -6,6 +6,9 @@ document.addEventListener('deviceready', function() {
 
 	$('html').removeClass('no-js');
 
+	// Initialize the collection
+	app.trees = new app.collections.Trees()
+
 	// Initialize the main view.
 	app.mainView = new app.views.Main();
 	app.mainView.render();

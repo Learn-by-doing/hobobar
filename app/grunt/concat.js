@@ -11,6 +11,7 @@ module.exports = {
 			'node_modules/handlebars/dist/handlebars.js',
 			'node_modules/leaflet/dist/leaflet-src.js',
 			'js/util.js',
+			'js/models/**/*',
 			'js/collections/**/*',
 			'js/views/**/*',
 			'js/router.js',
