@@ -23,7 +23,7 @@ module.exports = function(app) {
 				longitude: req.body.longitude,
 				type: req.body.type,
 				description: req.body.description,
-				filename: req.body.filename
+				filename: req.file.filename
 			})
 			.then(function(result) {
 				res.status(200).end();

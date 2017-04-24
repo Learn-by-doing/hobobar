@@ -61,6 +61,8 @@ app.views.Main = (function() {
 			this.$menu = this.$('#menu');
 			this.$menuToggle = this.$('#menu-toggle');
 			this.$viewContent = this.$('#view-content');
+			this.$message = this.$('#message');
+			this.$messageContent = this.$('#message-content');
 			return this;
 		},
 
@@ -69,11 +71,24 @@ app.views.Main = (function() {
 			this.$menu.toggleClass('visible');
 		},
 
+		showMessage: function(message) {
+
+			this.$messageContent.text(message);
+			this.$message.addClass('visible');
+		},
+
+		hideMessage: function() {
+
+			this.$message.removeClass('visible');
+		},
+
 		onDocumentClick: function(evt) {
 
 			if ($(evt.target)[0] !== this.$menuToggle[0]) {
 				this.$menu.removeClass('visible');
 			}
+
+			this.hideMessage();
 		}
 
 	});

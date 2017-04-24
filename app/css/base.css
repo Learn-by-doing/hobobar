@@ -45,3 +45,32 @@ html, body {
 	width: 100%;
 	height: 100%;
 }
+#message {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10000;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.2);
+}
+#message.visible {
+	display: table;
+}
+#message-inner {
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 10px;
+}
+#message-content {
+	display: inline-block;
+	vertical-align: top;
+	color: #f7f7f7;
+	background: rgba(0, 0, 0, .9);
+	border-radius: 5px;
+	padding: 10px;
+}
