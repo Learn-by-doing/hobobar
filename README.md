@@ -40,6 +40,12 @@ grunt
 cordova platform add browser
 cordova run browser
 ```
+
+If you have the error "Error executing "google-chrome --user-data-dir=/tmp/temp_chrome_user_data_dir_for_cordova http://localhost:8000/index.html": /bin/sh: 1: google-chrome: not found" you can use the command below to run in the browser:
+
+```
+cordova run browser -- --port=8001 --target=Chromium
+```
 * Note that [Google Chrome](https://www.google.com/chrome/) is required to run the app with `cordova run browser`.
 * Run `cordova platform add ios` to add iOS platform. Then run the app with `cordova emulate iOS`. This requires XCode.
 * You can also run `cordova platform add android` to add Android. This requires Android SDK.
