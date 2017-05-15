@@ -28,7 +28,7 @@ app.util = (function() {
 		checkLocationServiceAvailability: function(cb) {
 
 			// The diagnostic plugin is not available in the browser.
-			if (!cordova.plugins.diagnostic) {
+			if (!cordova.plugins || !cordova.plugins.diagnostic) {
 				return cb();
 			}
 
@@ -44,7 +44,7 @@ app.util = (function() {
 		checkLocationServiceAuthorization: function(cb) {
 
 			// The diagnostic plugin is not available in the browser.
-			if (!cordova.plugins.diagnostic) {
+			if (!cordova.plugins || !cordova.plugins.diagnostic) {
 				return cb();
 			}
 
@@ -76,7 +76,7 @@ app.util = (function() {
 		checkLocationServiceDeviceSetting: function(cb) {
 
 			// The diagnostic plugin is not available in the browser.
-			if (!cordova.plugins.diagnostic) {
+			if (!cordova.plugins || !cordova.plugins.diagnostic) {
 				return cb();
 			}
 
