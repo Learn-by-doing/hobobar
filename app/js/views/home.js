@@ -25,17 +25,31 @@ app.views.Home = (function() {
 
 		renderMap: function() {
 
-			app.util.getLocation(_.bind(function(error, location) {
+			var $map = this.$map;
 
-				var map = L.map(this.$map[0], {
-					center: [location.lat, location.long],
-					zoom: 13
-				});
+			app.util.getLocation(function(error, location) {
 
+				if (error) {
+					app.Logger.error('Failed to get location: ' + error.message);
+					app.mainView.showMessage('Failed to get your location. Is your location service turned off?');
+				}
+
+				var options = {};
+
+				if (location) {
+					// Center the map and set reasonable zoom level, if we have the current location.
+					options.center = [location.lat, location.long];
+					options.zoom = 13;
+				}
+
+				var map = L.map($map[0], options);
 				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-				L.marker([location.lat, location.long]).addTo(map);
 
-			}, this));
+				if (location) {
+					// Add current location marker to map, if we have it.
+					L.marker([location.lat, location.long]).addTo(map);
+				}
+			});
 		}
 
 	});
