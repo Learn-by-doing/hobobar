@@ -69,3 +69,16 @@
 	box-sizing: border-box;
 	padding: 8px 0;
 }
+
+#back-home {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: 26px;
+	height: 26px;
+	background: transparent url('../images/home.svg') center center no-repeat;
+	background-size: 26px;
+	cursor: pointer;
+	padding: 8px;
+}
