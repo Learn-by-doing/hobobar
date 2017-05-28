@@ -1,18 +1,23 @@
-#menu-toggle {
+.header-button {
 	position: absolute;
 	top: 0;
-	left: 0;
 	display: block;
 	width: 26px;
 	height: 26px;
-	background: transparent url('../images/menu.svg') center center no-repeat;
+	background-color: transparent;
+	background-position: center center;
+	background-repeat: no-repeat;
 	background-size: 26px;
 	cursor: pointer;
 	padding: 8px;
 }
-#menu-toggle:active,
-#menu-toggle:hover {
+.header-button:active,
+.header-button:hover {
 	background-color: #e6e6e6;
+}
+#menu-toggle {
+	left: 0;
+	background-image: url('../images/menu.svg');
 }
 #menu {
 	position: absolute;
@@ -69,16 +74,10 @@
 	box-sizing: border-box;
 	padding: 8px 0;
 }
-
 #back-home {
-	position: absolute;
-	top: 0;
 	right: 0;
-	display: block;
-	width: 26px;
-	height: 26px;
-	background: transparent url('../images/home.svg') center center no-repeat;
-	background-size: 26px;
-	cursor: pointer;
-	padding: 8px;
+	background-image: url('../images/home.svg');
+}
+body.view-home #back-home {
+	display: none;
 }
