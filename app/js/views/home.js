@@ -2,14 +2,31 @@ var app = app || {};
 
 app.views = app.views || {};
 
+
 app.views.Home = (function() {
 
 	'use strict';
 
 	return Backbone.View.extend({
 
+		collection: app.trees,
 		className: 'home',
 		template: '#template-home',
+
+		getTrees: function(cb) {
+
+			var self = this;
+			var treesArray = [];
+			this.collection.fetch({
+				success: function(response) {
+					treesArray = response.toJSON();
+					cb(null, treesArray);
+				},
+				error: function() {
+					cb(new Error('Failed to get trees!'));
+				}
+			})
+		},
 
 		render: function() {
 
@@ -26,6 +43,9 @@ app.views.Home = (function() {
 		renderMap: function() {
 
 			var $map = this.$map;
+			var map = this.map;
+			// Binds the function this.renderTrees to the object this
+			var renderTrees = _.bind(this.renderTrees, this);
 
 			app.util.getLocation(function(error, location) {
 
@@ -42,12 +62,25 @@ app.views.Home = (function() {
 					options.zoom = 13;
 				}
 
-				var map = L.map($map[0], options);
+				map = L.map($map[0], options);
 				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 				if (location) {
 					// Add current location marker to map, if we have it.
 					L.marker([location.lat, location.long]).addTo(map);
+				}
+
+				renderTrees(map);
+			});
+			
+		},
+
+		renderTrees: function(map) {
+			this.getTrees(function(error, treesArray) {
+				if (treesArray) {
+					_.each(treesArray, function(item) {
+						L.marker([item.latitude, item.longitude]).addTo(map);
+					});
 				}
 			});
 		}
