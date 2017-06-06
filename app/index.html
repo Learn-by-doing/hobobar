@@ -59,15 +59,26 @@
         </script>
 
         <script type="text/html" id="template-add-tree">
-            <label><input type="radio" name="type" value="tree">Tree</label>
-            <label><input type="radio" name="type" value="bush">Bush</label>
-            <label><input type="radio" name="type" value="herb">Herb</label>
-            <br>
-            <br>
-            <br>
-            <input id="description" type="text" name="description" placeholder="Description">
-            <br>
-            <br>
+            <div class="form-add-tree">
+                <div class="form-add-tree-radio-group">
+                    <div class="form-add-tree-radio-label">                   
+                        <input id="radio1" class="form-add-tree-radio" type="radio" name="type" value="tree" checked>
+                        <label for="radio1">Tree</label>
+                    </div>
+                    <div class="form-add-tree-radio-label">
+                        <input id="radio2" class="form-add-tree-radio" type="radio" name="type" value="bush">
+                        <label for="radio2">Bush</label>
+                    </div>
+                    <div class="form-add-tree-radio-label">
+                        <input id="radio3" class="form-add-tree-radio" type="radio" name="type" value="herb">
+                        <label for="radio3">Herb</label>
+                    </div>
+                </div>
+                <div class="form-add-tree-description">
+                    <textarea id="description" class="form-add-tree-description" type="text" name="description" placeholder="Description">
+                    </textarea>
+                </div>
+            </div>
             <a id="submit-add-tree">Add<a>
         </script>
 
