@@ -59,27 +59,24 @@
         </script>
 
         <script type="text/html" id="template-add-tree">
-            <div class="form-add-tree">
-                <div class="form-add-tree-radio-group">
-                    <div class="form-add-tree-radio-label">                   
-                        <input id="radio1" class="form-add-tree-radio" type="radio" name="type" value="tree" checked>
-                        <label for="radio1">Tree</label>
+            <div class="form add-tree">
+                <form>
+                    <div class="form-row types">
+                    {{#each types}}
+                        <div class="form-field type">
+                            <input id="add-tree-type-{{key}}" class="form-radio" type="radio" name="type" value="{{key}}" checked>
+                            <label for="add-tree-type-{{key}}" class="form-label">{{label}}</label>
+                        </div>
+                    {{/each}}
                     </div>
-                    <div class="form-add-tree-radio-label">
-                        <input id="radio2" class="form-add-tree-radio" type="radio" name="type" value="bush">
-                        <label for="radio2">Bush</label>
+                    <div class="form-row">
+                        <textarea id="add-tree-description" class="form-input" name="description" placeholder="Description"></textarea>
                     </div>
-                    <div class="form-add-tree-radio-label">
-                        <input id="radio3" class="form-add-tree-radio" type="radio" name="type" value="herb">
-                        <label for="radio3">Herb</label>
+                    <div class="form-buttons">
+                        <input class="form-button save" type="submit" value="Save">
                     </div>
-                </div>
-                <div class="form-add-tree-description">
-                    <textarea id="description" class="form-add-tree-description" type="text" name="description" placeholder="Description">
-                    </textarea>
-                </div>
+                </form>
             </div>
-            <a id="submit-add-tree">Add<a>
         </script>
 
         <script type="text/html" id="template-confirmation">

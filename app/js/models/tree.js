@@ -22,16 +22,18 @@ app.models.Tree = (function() {
 				var imagePath = model.get('imagePath');
 				var fileUploadOptions = new FileUploadOptions();
 				fileUploadOptions.fileKey = 'image';
-				// !! NOTE !!
-				// `imagePath` is the fileURL  from the `navigator.camera.getPicture` function.
-				fileUploadOptions.fileName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+				fileUploadOptions.fileName = 'tree';
 				fileUploadOptions.mimeType = 'image/jpeg';
 				fileUploadOptions.params = _.pick(model.toJSON(), 'latitude', 'longitude', 'type', 'description');
 				fileUploadOptions.chunkedMode = false;
 
 				var fileTransfer = new FileTransfer();
-				var onError = options.errors || _.noop;
+				var onError = options.error || _.noop;
 				var onSuccess = options.success || _.noop;
+
+				if (imagePath.substr(imagePath, 'file:'.length) !== 'file:') {
+					imagePath = 'data:image/jpeg;base64,' + imagePath;
+				}
 
 				fileTransfer.upload(imagePath, app.config.api.baseUrl + '/v1/tree', function() {
 					onSuccess();
