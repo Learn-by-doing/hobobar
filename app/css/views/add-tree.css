@@ -1,4 +1,10 @@
-#submit-add-tree {
+.cordova-camera-capture {
+	position: absolute !important;
+	left: 0;
+	top: 42px;
+	padding: 10px;
+}
+.view.add-tree .form-button.save {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -8,9 +14,52 @@
 	color: #fff;
 	text-align: center;
 	text-decoration: none;
+	outline: none;
+	border: none;
 	background: #1f79c8;
+	cursor: pointer;
 	padding: 12px 0;
 }
-#submit-add-tree:hover {
-	text-decoration: none;
+.view.add-tree .form-radio {
+	position: absolute;
+	left: -99999em;
+	top: 0;
+	visibility: hidden;
+}
+.view.add-tree .form-row.types {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+}
+.view.add-tree .form-field.type {
+	float: left;
+	width: auto;
+}
+.view.add-tree input[type="radio"] + label {
+	display: block;
+	width: auto;
+	padding: 4px 12px;
+	line-height: 20px;
+	color: #333;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+	background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+	background-repeat: repeat-x;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+.view.add-tree input[type="radio"]:checked + label {
+	background-image: none;
+	outline: 0;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+	background-color: #e0e0e0;
+}
+.view.add-tree .form-add-tree-description {
+	margin-top: 60px;
+	height: 30px;
+	width: 158px;
 }

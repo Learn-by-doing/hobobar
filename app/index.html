@@ -59,16 +59,24 @@
         </script>
 
         <script type="text/html" id="template-add-tree">
-            <label><input type="radio" name="type" value="tree">Tree</label>
-            <label><input type="radio" name="type" value="bush">Bush</label>
-            <label><input type="radio" name="type" value="herb">Herb</label>
-            <br>
-            <br>
-            <br>
-            <input id="description" type="text" name="description" placeholder="Description">
-            <br>
-            <br>
-            <a id="submit-add-tree">Add<a>
+            <div class="form add-tree">
+                <form>
+                    <div class="form-row types">
+                    {{#each types}}
+                        <div class="form-field type">
+                            <input id="add-tree-type-{{key}}" class="form-radio" type="radio" name="type" value="{{key}}" checked>
+                            <label for="add-tree-type-{{key}}" class="form-label">{{label}}</label>
+                        </div>
+                    {{/each}}
+                    </div>
+                    <div class="form-row">
+                        <textarea id="add-tree-description" class="form-input" name="description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <input class="form-button save" type="submit" value="Save">
+                    </div>
+                </form>
+            </div>
         </script>
 
         <script type="text/html" id="template-confirmation">

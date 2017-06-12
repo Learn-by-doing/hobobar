@@ -13,21 +13,27 @@ app.views.AddTree = (function() {
 		template: '#template-add-tree',
 
 		events: {
-			'click #submit-add-tree': 'submit'
+			'submit form': 'submit'
 		},
 
 		render: function() {
 
 			var html = $(this.template).html();
 			var template = Handlebars.compile(html);
-			this.$el.html(template({
-				// Data for the template goes here.
-			}));
-			this.onRender();
+			var data = {
+				types: [
+					{ key: 'apple', label: 'Apple' },
+					{ key: 'cherry', label: 'Cherry' },
+					{ key: 'pear', label: 'Pear' }
+				]
+			};
+			this.$el.html(template(data));
 			return this;
 		},
 
-		onRender: function() {
+		submit: function(evt) {
+
+			evt.preventDefault();
 
 			app.util.takePicture(function(error, imagePath) {
 
@@ -52,24 +58,19 @@ app.views.AddTree = (function() {
 					});
 
 					newTree.save(null, {
-						success: function(response) {
+						success: function() {
 							app.trees.add(newTree);
 							app.mainView.showMessage('A new tree was added. Thanks!')
 							// Show the home screen.
 							app.router.navigate('home', { trigger: true });
 						},
-						error: function(error) {
+						error: function(model, error) {
 							app.Logger.error(error);
 							app.mainView.showMessage('Failed to add tree.')
 						}
 					});
 				});
 			});
-		},
-
-		submit: function() {
 		}
-
 	});
-
 })();
