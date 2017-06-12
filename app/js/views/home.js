@@ -20,6 +20,7 @@ app.views.Home = (function() {
 			this.collection.fetch({
 				success: function(response) {
 					treesArray = response.toJSON();
+					console.log(treesArray);
 					cb(null, treesArray);
 				},
 				error: function() {
@@ -79,7 +80,11 @@ app.views.Home = (function() {
 			this.getTrees(function(error, treesArray) {
 				if (treesArray) {
 					_.each(treesArray, function(item) {
-						L.marker([item.latitude, item.longitude]).addTo(map);
+						L.marker([item.latitude, item.longitude])
+							.on('click', function(e){
+								app.router.navigate("show/" + item.id, {trigger: true});
+							})
+							.addTo(map);
 					});
 				}
 			});
