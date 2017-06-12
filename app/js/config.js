@@ -9,6 +9,9 @@ app.config = (function() {
 	'use strict';
 
 	return {
+		images: {
+			baseUrl: 'https://hobobar.herokuapp.com'
+		},
 		api: {
 			baseUrl: 'https://hobobar.herokuapp.com/api'
 		},
