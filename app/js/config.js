@@ -10,7 +10,7 @@ app.config = (function() {
 
 	return {
 		api: {
-			baseUrl: 'http://localhost:3000/api'
+			baseUrl: 'https://hobobar.herokuapp.com/api'
 		},
 		geolocation: {
 			timeout: 30000
